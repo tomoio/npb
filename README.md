@@ -1,0 +1,4 @@
+npb
+===
+
+Node Package Boilerplate
