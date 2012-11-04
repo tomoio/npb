@@ -5,12 +5,12 @@ NPB = require('../lib/npb')
 program
   .option('-b --bin', 'true if the project should contain a bin script')
   .option('--assets', 'true if the project should contain an "assets" directory')
-  .option('-n --name', 'the project name')
-  .option('-d --description', 'the project description')
-  .option('-a --author', 'the name of the project author')
-  .option('-e --email', 'the email address of the project author')
-  .option('-u --url', 'the url of the project author')
-  .option('-g --github', 'your github username')
+  .option('-n --name <name>', 'the project name')
+  .option('-d --description <description>', 'the project description')
+  .option('-a --author <name>', 'the name of the project author')
+  .option('-e --email <email>', 'the email address of the project author')
+  .option('-u --url <url>', 'the url of the project author')
+  .option('-g --github <name>', 'your github username')
 
 program
   .parse(process.argv)
