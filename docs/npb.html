@@ -1,15 +1,21 @@
-<!DOCTYPE html>  <html> <head>   <title>npb.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="npb.bin.html">                 npb.bin.coffee               </a>                                           <a class="source" href="npb.html">                 npb.coffee               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               npb.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="p">[</span><span class="nx">async</span><span class="p">,</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">fs</span><span class="p">,</span> <span class="nx">beautifyjs</span><span class="p">,</span> <span class="nx">touch</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<!DOCTYPE html>  <html> <head>   <title>npb.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="npb.bin.html">                 npb.bin.coffee               </a>                                           <a class="source" href="npb.html">                 npb.coffee               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               npb.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="p">[</span><span class="nx">async</span><span class="p">,</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">fs</span><span class="p">,</span> <span class="nx">beautifyjs</span><span class="p">,</span> <span class="nx">touch</span><span class="p">,</span> <span class="nx">hbs</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
   <span class="nx">require</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="k">for</span> <span class="nx">v</span> <span class="k">in</span> <span class="p">[</span>
-    <span class="s">&#39;async&#39;</span><span class="p">,</span> <span class="s">&#39;path&#39;</span><span class="p">,</span> <span class="s">&#39;fs&#39;</span><span class="p">,</span> <span class="s">&#39;beautifyjs&#39;</span><span class="p">,</span> <span class="s">&#39;touch&#39;</span>
+    <span class="s">&#39;async&#39;</span><span class="p">,</span> <span class="s">&#39;path&#39;</span><span class="p">,</span> <span class="s">&#39;fs&#39;</span><span class="p">,</span> <span class="s">&#39;beautifyjs&#39;</span><span class="p">,</span> <span class="s">&#39;touch&#39;</span><span class="p">,</span> <span class="s">&#39;handlebars&#39;</span>
   <span class="p">]</span>
 <span class="p">)</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">touch</span><span class="p">)</span>
-<span class="nv">module.exports = </span><span class="k">class</span> <span class="nx">NPB</span>
-  <span class="nv">constructor: </span><span class="p">(</span><span class="vi">@root = </span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="vi">@opts = </span><span class="p">{})</span> <span class="o">-&gt;</span>
-    <span class="vi">@basename = </span><span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">@root</span><span class="p">)</span>
-    <span class="vi">@projectTitle = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">projectitle</span> <span class="o">?</span> <span class="nx">@basename</span>
-    <span class="vi">@description = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">description</span> <span class="o">?</span> <span class="s">&#39;A node module.&#39;</span>
 
+<span class="nv">module.exports = </span><span class="k">class</span> <span class="nx">NPB</span>
+  <span class="nv">constructor: </span><span class="p">(</span><span class="vi">@root = </span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="vi">@opts = </span><span class="p">{},</span> <span class="vi">@callback = </span><span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="vi">@bin = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">bin</span>
+    <span class="vi">@basename = </span><span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">@root</span><span class="p">)</span>
+    <span class="vi">@projectTitle = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">projectTitle</span> <span class="o">?</span> <span class="nx">@basename</span>
+    <span class="vi">@description = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">description</span> <span class="o">?</span> <span class="s">&#39;A node module.&#39;</span>
+    <span class="vi">@version = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">version</span> <span class="o">?</span> <span class="s">&#39;0.0.1&#39;</span>
+    <span class="vi">@author = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">author</span>
+    <span class="vi">@email = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">email</span>
+    <span class="vi">@url = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">url</span>
+    <span class="vi">@githubName = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">githubName</span>
+    <span class="vi">@templates = </span><span class="p">{}</span>
     <span class="nx">fs</span><span class="p">.</span><span class="nx">mkdir</span><span class="p">(</span><span class="nx">@root</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
       <span class="nx">@mkdir</span><span class="p">()</span>
     <span class="p">)</span>
@@ -17,22 +23,17 @@
     <span class="vi">@GITIGNORE = </span><span class="p">[</span><span class="s">&#39;lib-cov&#39;</span><span class="p">,</span> <span class="s">&#39;*.seed&#39;</span><span class="p">,</span> <span class="s">&#39;*.log&#39;</span><span class="p">,</span> <span class="s">&#39;*.csv&#39;</span><span class="p">,</span> <span class="s">&#39;*.dat&#39;</span><span class="p">,</span> <span class="s">&#39;*.out&#39;</span><span class="p">,</span> <span class="s">&#39;*.pid&#39;</span><span class="p">,</span> <span class="s">&#39;*.gz&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;pids&#39;</span><span class="p">,</span> <span class="s">&#39;logs&#39;</span><span class="p">,</span> <span class="s">&#39;results&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;node_modules&#39;</span><span class="p">,</span> <span class="s">&#39;npm-debug.log&#39;</span><span class="p">]</span>
 
     <span class="vi">@MAKEFILE = </span><span class="p">[</span>
-      <span class="s">&#39;test:&#39;</span><span class="p">,</span>
-      <span class="s">&#39;  ./node_modules/.bin/mocha ./test/*.coffee --compilers coffee:coffee-script -R spec&#39;</span><span class="p">,</span>
-      <span class="s">&#39;.PHONY: test&#39;</span>
+      <span class="s">&quot;test:&quot;</span><span class="p">,</span>
+      <span class="s">&quot;\t./node_modules/.bin/mocha ./test/*.coffee --compilers coffee:coffee-script -R spec&quot;</span><span class="p">,</span>
+      <span class="s">&quot;.PHONY: test&quot;</span>
     <span class="p">]</span>
 
     <span class="vi">@PACKAGE_JSON = </span><span class="p">{</span>
-      <span class="s">&quot;name&quot;</span> <span class="o">:</span> <span class="nx">@basename</span><span class="p">,</span>
-      <span class="s">&quot;version&quot;</span> <span class="o">:</span> <span class="s">&quot;0.0.1&quot;</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span> <span class="o">:</span> <span class="nx">@basename</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span>
+      <span class="s">&quot;version&quot;</span> <span class="o">:</span> <span class="nx">@version</span><span class="p">,</span>
       <span class="s">&quot;description&quot;</span> <span class="o">:</span> <span class="nx">@description</span><span class="p">,</span>
       <span class="s">&quot;keywords&quot;</span> <span class="o">:</span> <span class="p">[],</span>
-      <span class="s">&quot;bugs&quot;</span> <span class="o">:</span> <span class="p">{</span><span class="s">&quot;url&quot;</span> <span class="o">:</span> <span class="s">&quot;https://github.com/tomoio/</span><span class="si">#{</span><span class="nx">@basename</span><span class="si">}</span><span class="s">/issues&quot;</span><span class="p">},</span>
-      <span class="s">&quot;author&quot;</span> <span class="o">:</span> <span class="p">{</span>
-        <span class="s">&quot;name&quot;</span> <span class="o">:</span> <span class="s">&quot;Tomo I/O&quot;</span><span class="p">,</span>
-        <span class="s">&quot;email&quot;</span> <span class="o">:</span> <span class="s">&quot;711@tomo.io&quot;</span><span class="p">,</span>
-        <span class="s">&quot;url&quot;</span> <span class="o">:</span> <span class="s">&quot;http://tomo.io&quot;</span>
-      <span class="p">},</span>
+      <span class="s">&quot;bugs&quot;</span> <span class="o">:</span> <span class="p">{</span><span class="s">&quot;url&quot;</span> <span class="o">:</span> <span class="s">&quot;https://github.com/</span><span class="si">#{</span><span class="nx">@githubName</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">@basename</span><span class="si">}</span><span class="s">/issues&quot;</span><span class="p">},</span>
       <span class="s">&quot;main&quot;</span> <span class="o">:</span> <span class="s">&quot;./lib/</span><span class="si">#{</span><span class="nx">@basename</span><span class="si">}</span><span class="s">&quot;</span><span class="p">,</span>
       <span class="s">&quot;directories&quot;</span> <span class="o">:</span> <span class="p">{</span>
         <span class="s">&quot;lib&quot;</span> <span class="o">:</span> <span class="s">&quot;./lib&quot;</span><span class="p">,</span>
@@ -40,7 +41,7 @@
       <span class="p">},</span>
       <span class="s">&quot;repository&quot;</span><span class="o">:</span> <span class="p">{</span>
         <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;git&quot;</span><span class="p">,</span>
-        <span class="s">&quot;url&quot;</span><span class="o">:</span> <span class="s">&quot;https://github.com/tomoio/</span><span class="si">#{</span><span class="nx">@basename</span><span class="si">}</span><span class="s">&quot;</span>
+        <span class="s">&quot;url&quot;</span><span class="o">:</span> <span class="s">&quot;https://github.com/</span><span class="si">#{</span><span class="nx">@githubName</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">@basename</span><span class="si">}</span><span class="s">&quot;</span>
       <span class="p">},</span>
       <span class="s">&quot;dependencies&quot;</span> <span class="o">:</span> <span class="p">{</span>
       <span class="p">},</span>
@@ -51,7 +52,16 @@
       <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="k">if</span> <span class="nx">@opts</span><span class="p">.</span><span class="nx">bin</span>
+    <span class="k">if</span> <span class="nx">@opts</span><span class="p">.</span><span class="nx">author</span><span class="o">?</span> <span class="o">or</span> <span class="nx">@opts</span><span class="p">.</span><span class="nx">emai</span><span class="o">?</span> <span class="o">or</span> <span class="nx">@opts</span><span class="p">.</span><span class="nx">url</span><span class="o">?</span>
+      <span class="vi">@PACKAGE_JSON.author = </span><span class="p">{}</span>
+      <span class="k">if</span> <span class="nx">@opts</span><span class="p">.</span><span class="nx">author</span><span class="o">?</span>
+        <span class="vi">@PACKAGE_JSON.author.name = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">author</span>
+      <span class="k">if</span> <span class="nx">@opts</span><span class="p">.</span><span class="nx">email</span><span class="o">?</span>
+        <span class="vi">@PACKAGE_JSON.author.email = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">email</span>
+      <span class="k">if</span> <span class="nx">@opts</span><span class="p">.</span><span class="nx">url</span><span class="o">?</span>
+        <span class="vi">@PACKAGE_JSON.author.url = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">url</span>
+
+    <span class="k">if</span> <span class="nx">@bin</span>
       <span class="vi">@PACKAGE_JSON.bin = </span><span class="s">&quot;./bin/</span><span class="si">#{</span><span class="nx">@basename</span><span class="si">}</span><span class="s">&quot;</span>
       <span class="vi">@PACKAGE_JSON.directories.bin = </span><span class="s">&quot;./bin&quot;</span>
       <span class="vi">@PACKAGE_JSON.dependencies.commander = </span><span class="s">&quot;*&quot;</span>
@@ -87,39 +97,77 @@
       <span class="nx">dirs</span><span class="p">,</span>
       <span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span>
         <span class="nx">fs</span><span class="p">.</span><span class="nx">mkdir</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">@root</span><span class="p">,</span><span class="nx">v</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
           <span class="nx">callback</span><span class="p">()</span>
         <span class="p">)</span>
         
       <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">=&gt;</span>
-        <span class="nx">@writeGitignore</span><span class="p">()</span>
+        <span class="nx">@getTemplates</span><span class="p">()</span>
     <span class="p">)</span>
 
-  <span class="nv">writeGitignore : </span><span class="o">-&gt;</span>
-    <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">@root</span><span class="p">,</span><span class="s">&#39;.gitignore&#39;</span><span class="p">),</span><span class="nx">@GITIGNORE</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s">&#39;fuckkkk&#39;</span><span class="p">)</span>
-      <span class="nx">@writeMakefile</span><span class="p">()</span>
+  <span class="nv">write : </span><span class="o">-&gt;</span>
+    <span class="nv">files = </span><span class="p">[]</span>
+    <span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nv">body : </span><span class="nx">@GITIGNORE</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">),</span> <span class="nv">filename : </span><span class="s">&#39;.gitignore&#39;</span><span class="p">})</span>
+    <span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nv">body : </span><span class="nx">@MAKEFILE</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">),</span> <span class="nx">filename</span> <span class="o">:</span><span class="s">&#39;Makefile&#39;</span><span class="p">})</span>
+    <span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nv">body : </span><span class="nx">beautifyjs</span><span class="p">.</span><span class="nx">js_beautify</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">@PACKAGE_JSON</span><span class="p">),{</span><span class="nx">indent_size</span><span class="o">:</span><span class="mi">2</span><span class="p">}),</span> <span class="nv">filename : </span><span class="s">&#39;package.json&#39;</span><span class="p">})</span>
+    <span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nv">body : </span><span class="nx">beautifyjs</span><span class="p">.</span><span class="nx">js_beautify</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">@BYSTANDER</span><span class="p">),{</span><span class="nx">indent_size</span><span class="o">:</span><span class="mi">2</span><span class="p">}),</span> <span class="nv">filename : </span><span class="s">&#39;.bystander&#39;</span><span class="p">})</span>
+    <span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nv">body : </span><span class="nx">@templates</span><span class="p">[</span><span class="s">&#39;LICENSE&#39;</span><span class="p">]({</span><span class="nx">author</span><span class="o">:</span><span class="nx">@author</span><span class="p">,</span> <span class="nx">email</span><span class="o">:</span><span class="nx">@email</span><span class="p">,</span> <span class="nx">url</span><span class="o">:</span><span class="nx">@url</span><span class="p">,</span> <span class="nv">projectTitle : </span><span class="nx">@projectTitle</span><span class="p">}),</span> <span class="nv">filename : </span><span class="s">&#39;LICENSE&#39;</span><span class="p">})</span>
+    <span class="nv">bars = </span><span class="p">[]</span>
+    <span class="k">for</span> <span class="nx">v</span> <span class="k">in</span> <span class="nx">@projectTitle</span>
+      <span class="nx">bars</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">)</span>
+    <span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nv">body : </span><span class="nx">@templates</span><span class="p">[</span><span class="s">&#39;README&#39;</span><span class="p">]({</span><span class="nx">description</span><span class="o">:</span><span class="nx">@description</span><span class="p">,</span> <span class="nv">projectTitle : </span><span class="nx">@projectTitle</span><span class="p">,</span> <span class="nv">bars: </span><span class="nx">bars</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)}),</span> <span class="nv">filename : </span><span class="s">&#39;README.md&#39;</span><span class="p">})</span>
+
+    <span class="nx">async</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span>
+      <span class="nx">files</span>
+      <span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">@root</span><span class="p">,</span> <span class="nx">v</span><span class="p">.</span><span class="nx">filename</span><span class="p">),</span> <span class="nx">v</span><span class="p">.</span><span class="nx">body</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
+          <span class="nx">callback</span><span class="p">()</span>
+        <span class="p">)</span>
+      <span class="o">=&gt;</span>
+        <span class="nx">@touchFiles</span><span class="p">()</span>
     <span class="p">)</span>
 
-  <span class="nv">writeMakefile : </span><span class="o">-&gt;</span>
-    <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">@root</span><span class="p">,</span><span class="s">&#39;Makefile&#39;</span><span class="p">),</span><span class="nx">@MAKEFILE</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s">&#39;mkfile&#39;</span><span class="p">)</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-      <span class="nx">@writePackageJson</span><span class="p">()</span>
+  <span class="nv">getTemplates : </span><span class="o">-&gt;</span>
+    <span class="nv">files = </span><span class="p">[</span><span class="s">&#39;LICENSE&#39;</span><span class="p">,</span> <span class="s">&#39;README&#39;</span><span class="p">]</span>
+    <span class="nx">async</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span>
+      <span class="nx">files</span>
+      <span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s">&quot;../assets/</span><span class="si">#{</span><span class="nx">v</span><span class="si">}</span><span class="s">.hbs&quot;</span><span class="p">),</span> <span class="s">&#39;utf8&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="nx">body</span><span class="p">)</span> <span class="o">=&gt;</span>
+          <span class="nx">@templates</span><span class="p">[</span><span class="nx">v</span><span class="p">]</span> <span class="o">=</span> <span class="nx">hbs</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span>
+          <span class="nx">callback</span><span class="p">()</span>
+        <span class="p">)</span>
+      <span class="p">()</span> <span class="o">=&gt;</span>
+        <span class="nx">@write</span><span class="p">()</span>
     <span class="p">)</span>
 
-  <span class="nv">writePackageJson : </span><span class="o">-&gt;</span>
-    <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">@root</span><span class="p">,</span><span class="s">&#39;package.json&#39;</span><span class="p">),</span><span class="nx">beautifyjs</span><span class="p">.</span><span class="nx">js_beautify</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">@PACKAGE_JSON</span><span class="p">),{</span><span class="nx">indent_size</span><span class="o">:</span><span class="mi">2</span><span class="p">}),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s">&#39;mkfile&#39;</span><span class="p">)</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-      <span class="nx">@writeBystander</span><span class="p">()</span>
+  <span class="nv">touchFiles : </span><span class="o">-&gt;</span>
+    <span class="nv">files = </span><span class="p">[</span>
+      <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">@root</span><span class="p">,</span> <span class="s">&quot;src/</span><span class="si">#{</span><span class="nx">@basename</span><span class="si">}</span><span class="s">.coffee&quot;</span><span class="p">),</span>
+      <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">@root</span><span class="p">,</span> <span class="s">&quot;test/test.</span><span class="si">#{</span><span class="nx">@basename</span><span class="si">}</span><span class="s">.coffee&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="nx">@bin</span>
+      <span class="nx">files</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">@root</span><span class="p">,</span> <span class="s">&quot;bin/</span><span class="si">#{</span><span class="nx">@basename</span><span class="si">}</span><span class="s">&quot;</span><span class="p">))</span>
+    <span class="nx">async</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span>
+      <span class="nx">files</span>
+      <span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">touch</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span>
+          <span class="nx">callback</span><span class="p">()</span>
+        <span class="p">)</span>
+      <span class="p">()</span> <span class="o">=&gt;</span>
+        <span class="nx">@chmod</span><span class="p">()</span>
     <span class="p">)</span>
 
-  <span class="nv">writeBystander : </span><span class="o">-&gt;</span>
-    <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">@root</span><span class="p">,</span><span class="s">&#39;.bystander&#39;</span><span class="p">),</span><span class="nx">beautifyjs</span><span class="p">.</span><span class="nx">js_beautify</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">@BYSTANDER</span><span class="p">),{</span><span class="nx">indent_size</span><span class="o">:</span><span class="mi">2</span><span class="p">}),</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s">&#39;mkfile&#39;</span><span class="p">)</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-    <span class="p">)</span>
+  <span class="nv">chmod : </span><span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="nx">@bin</span>
+      <span class="nx">fs</span><span class="p">.</span><span class="nx">chmod</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">@root</span><span class="p">,</span> <span class="s">&quot;bin/</span><span class="si">#{</span><span class="nx">@basename</span><span class="si">}</span><span class="s">&quot;</span><span class="p">),</span> <span class="s">&#39;755&#39;</span><span class="p">,()</span><span class="o">=&gt;</span>
+        <span class="nx">@exit</span><span class="p">()</span>
+      <span class="p">)</span>
+    <span class="k">else</span>
+      <span class="nx">@exit</span><span class="p">()</span>
+
+  <span class="nv">exit : </span><span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="nx">@callback</span><span class="o">?</span>
+      <span class="nx">@callback</span><span class="p">()</span>
+    <span class="k">else</span>
+      <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
 
 </pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
