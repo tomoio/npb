@@ -1,0 +1,33 @@
+{
+  "name": "testProject",
+  "version": "0.0.1",
+  "description": "A boilerplate to build a node package upon.",
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/undefined/testProject/issues"
+  },
+  "main": "./lib/testProject",
+  "directories": {
+    "lib": "./lib",
+    "doc": "./docs",
+    "bin": "./bin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/undefined/testProject"
+  },
+  "dependencies": {
+    "commander": "*"
+  },
+  "devDependencies": {
+    "coffee-script": "",
+    "mocha": "",
+    "chai": ""
+  },
+  "author": {
+    "name": "Tomo I/O",
+    "email": "711@tomo.io",
+    "url": "http://tomo.io/"
+  },
+  "bin": "./bin/testProject"
+}

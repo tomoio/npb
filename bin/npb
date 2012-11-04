@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+(function() {
+  var NPB, program, root, _ref;
+
+  program = require('commander');
+
+  NPB = require('../lib/npb');
+
+  program.option('-b --bin', 'true if the project should contain a bin script').option('-a --assets', 'true if the project should contain an "assets" directory').option('-n --name', 'the project name').option('-d --description', 'the project description');
+
+  program.parse(process.argv);
+
+  root = (_ref = program.args[0]) != null ? _ref : './';
+
+  new NPB(root, {
+    bin: program.bin,
+    assets: program.assets
+  });
+
+}).call(this);
