@@ -1,12 +1,12 @@
 {
-  "name": "testProject",
+  "name": "npb",
   "version": "0.0.1",
-  "description": "A boilerplate to build a node package upon.",
-  "keywords": [],
+  "description": "Node Package boilerplate.",
+  "keywords": ["node", "boilerplate"],
   "bugs": {
-    "url": "https://github.com/undefined/testProject/issues"
+    "url": "https://github.com/tomoio/npb/issues"
   },
-  "main": "./lib/testProject",
+  "main": "./lib/npb",
   "directories": {
     "lib": "./lib",
     "doc": "./docs",
@@ -14,20 +14,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/undefined/testProject"
+    "url": "https://github.com/tomoio/npb"
   },
   "dependencies": {
-    "commander": "*"
+    "commander" : "*",
+    "async" : "*",
+    "beautifyjs" : "*",
+    "touch" : "*",
+    "handlebars" : "*"
   },
   "devDependencies": {
-    "coffee-script": "",
-    "mocha": "",
-    "chai": ""
+    "coffee-script": "*",
+    "mocha": "*",
+    "chai": "*",
+    "rimraf" : "*"
   },
   "author": {
     "name": "Tomo I/O",
     "email": "711@tomo.io",
     "url": "http://tomo.io/"
   },
-  "bin": "./bin/testProject"
+  "bin": "./bin/npb"
 }

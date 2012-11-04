@@ -29,7 +29,7 @@ module.exports = class NPB
     ]
 
     @PACKAGE_JSON = {
-      "name" : @basename,
+      "name" : @basename.toLowerCase(),
       "version" : @version,
       "description" : @description,
       "keywords" : [],
