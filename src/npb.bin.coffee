@@ -6,7 +6,7 @@ program
   .option('-b --bin', 'true if the project should contain a bin script')
   .option('--assets', 'true if the project should contain an "assets" directory')
   .option('-n --name <name>', 'the project name')
-  .option('-d --description <description>', 'the project description')
+  .option('-d --desc <description>', 'the project description')
   .option('-a --author <name>', 'the name of the project author')
   .option('-e --email <email>', 'the email address of the project author')
   .option('-u --url <url>', 'the url of the project author')
@@ -26,7 +26,7 @@ new NPB(
     author : program.author,
     email : program.email,
     url : program.url,
-    description : program.description,
+    description : program.desc,
     name : program.name,
     githubName : program.github,
     configFile : program.config

@@ -6,9 +6,12 @@
 
 module.exports = class NPB
   constructor: (@root = process.cwd(), @opts = {}, @callback = null) ->
-    if @opts.configFile
+    if @opts.configFile?
       config = @readConfigFile()
       unless config is false
+        for k, v of @opts
+          if not v?
+            delete @opts[k]
         @opts = _.extend(config, @opts)
 
     @bin = @opts.bin
@@ -93,7 +96,8 @@ module.exports = class NPB
     }
   readConfigFile : ->
     try
-      return JSON.parse(fs.readFileSync(@opts.configFile, 'utf8'))
+      console.log(path.resolve(@opts.configFile))
+      return JSON.parse(fs.readFileSync(path.resolve(@opts.configFile), 'utf8'))
     catch e
       return false
   mkdir : ->

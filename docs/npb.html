@@ -6,10 +6,14 @@
 
 <span class="nv">module.exports = </span><span class="k">class</span> <span class="nx">NPB</span>
   <span class="nv">constructor: </span><span class="p">(</span><span class="vi">@root = </span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="vi">@opts = </span><span class="p">{},</span> <span class="vi">@callback = </span><span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">@opts</span><span class="p">.</span><span class="nx">configFile</span>
+    <span class="k">if</span> <span class="nx">@opts</span><span class="p">.</span><span class="nx">configFile</span><span class="o">?</span>
       <span class="nv">config = </span><span class="nx">@readConfigFile</span><span class="p">()</span>
       <span class="nx">unless</span> <span class="nx">config</span> <span class="o">is</span> <span class="kc">false</span>
+        <span class="k">for</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">v</span> <span class="k">of</span> <span class="nx">@opts</span>
+          <span class="k">if</span> <span class="o">not</span> <span class="nx">v</span><span class="o">?</span>
+            <span class="k">delete</span> <span class="nx">@opts</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span>
         <span class="vi">@opts = </span><span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">@opts</span><span class="p">)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">@opts</span><span class="p">)</span>
 
     <span class="vi">@bin = </span><span class="nx">@opts</span><span class="p">.</span><span class="nx">bin</span>
     <span class="vi">@basename = </span><span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">@root</span><span class="p">)</span>
@@ -93,7 +97,8 @@
     <span class="p">}</span>
   <span class="nv">readConfigFile : </span><span class="o">-&gt;</span>
     <span class="k">try</span>
-      <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">@opts</span><span class="p">.</span><span class="nx">configFile</span><span class="p">,</span> <span class="s">&#39;utf8&#39;</span><span class="p">))</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">@opts</span><span class="p">.</span><span class="nx">configFile</span><span class="p">))</span>
+      <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">@opts</span><span class="p">.</span><span class="nx">configFile</span><span class="p">),</span> <span class="s">&#39;utf8&#39;</span><span class="p">))</span>
     <span class="k">catch</span> <span class="nx">e</span>
       <span class="k">return</span> <span class="kc">false</span>
   <span class="nv">mkdir : </span><span class="o">-&gt;</span>
