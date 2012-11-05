@@ -1,6 +1,6 @@
 {
   "name": "npb",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node Package Boilerplate.",
   "keywords": ["node", "boilerplate"],
   "bugs": {
@@ -21,7 +21,8 @@
     "async" : "*",
     "beautifyjs" : "*",
     "touch" : "*",
-    "handlebars" : "*"
+    "handlebars" : "*",
+    "underscore" : "*"
   },
   "devDependencies": {
     "coffee-script": "*",

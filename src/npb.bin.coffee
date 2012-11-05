@@ -11,6 +11,7 @@ program
   .option('-e --email <email>', 'the email address of the project author')
   .option('-u --url <url>', 'the url of the project author')
   .option('-g --github <name>', 'your github username')
+  .option('-c --config <path>', 'a path to a config file')
 
 program
   .parse(process.argv)
@@ -27,6 +28,7 @@ new NPB(
     url : program.url,
     description : program.description,
     name : program.name,
-    githubName : program.github
+    githubName : program.github,
+    configFile : program.config
   }
 )

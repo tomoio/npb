@@ -1,11 +1,16 @@
-[async, path, fs, beautifyjs, touch, hbs] = (
+[async, path, fs, beautifyjs, touch, hbs, _] = (
   require(v) for v in [
-    'async', 'path', 'fs', 'beautifyjs', 'touch', 'handlebars'
+    'async', 'path', 'fs', 'beautifyjs', 'touch', 'handlebars', 'underscore'
   ]
 )
 
 module.exports = class NPB
   constructor: (@root = process.cwd(), @opts = {}, @callback = null) ->
+    if @opts.configFile
+      config = @readConfigFile()
+      unless config is false
+        @opts = _.extend(config, @opts)
+
     @bin = @opts.bin
     @basename = path.basename(@root)
     @projectTitle = @opts.projectTitle ? @basename
@@ -86,7 +91,11 @@ module.exports = class NPB
         }
       }
     }
-
+  readConfigFile : ->
+    try
+      return JSON.parse(fs.readFileSync(@opts.configFile, 'utf8'))
+    catch e
+      return false
   mkdir : ->
     dirs = ['src', 'docs', 'test', 'lib']
     extra = ['bin','assets']
