@@ -11,6 +11,7 @@
   <span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s">&#39;-e --email &lt;email&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;the email address of the project author&#39;</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s">&#39;-u --url &lt;url&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;the url of the project author&#39;</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s">&#39;-g --github &lt;name&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;your github username&#39;</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s">&#39;-c --config &lt;path&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;a path to a config file&#39;</span><span class="p">)</span>
 
 <span class="nx">program</span>
   <span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">)</span>
@@ -27,7 +28,8 @@
     <span class="nv">url : </span><span class="nx">program</span><span class="p">.</span><span class="nx">url</span><span class="p">,</span>
     <span class="nv">description : </span><span class="nx">program</span><span class="p">.</span><span class="nx">description</span><span class="p">,</span>
     <span class="nv">name : </span><span class="nx">program</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
-    <span class="nv">githubName : </span><span class="nx">program</span><span class="p">.</span><span class="nx">github</span>
+    <span class="nv">githubName : </span><span class="nx">program</span><span class="p">.</span><span class="nx">github</span><span class="p">,</span>
+    <span class="nv">configFile : </span><span class="nx">program</span><span class="p">.</span><span class="nx">config</span>
   <span class="p">}</span>
 <span class="p">)</span>
 
